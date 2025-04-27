@@ -5,7 +5,10 @@ from src.Game import opponent_played
 
 
 def show_selected():
+    opp_played = opponent_played()
+    win_label.config(text = "Opponent played: " + opp_played)
     print("Selected option:", selected_option.get())
+    print("Opponent Played:", opp_played)
 
 root = Tk()
 root.geometry("500x500")
@@ -51,6 +54,9 @@ for i, image in enumerate(images):
 button = Button(label, text="Play", font = 20, command=show_selected, width = 10, height = 3)
 button.pack(anchor = "center")
 
-win_label = Label(label, text = "Opponent played: " + opponent_played(), font = 20)
-win_label.pack(anchor = 'w')
+win_label = Label(frame, text = "Opponent played: none", font = 20)
+win_label.pack(anchor = 'e')
+
+
+
 root.mainloop()
