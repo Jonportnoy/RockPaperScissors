@@ -1,14 +1,16 @@
 from tkinter import *
 from PIL import Image, ImageTk
 
-from src.Game import opponent_played
+from src.Game import opponent_played, play
 
 
 def show_selected():
     opp_played = opponent_played()
-    win_label.config(text = "Opponent played: " + opp_played)
+    did_win = play(selected_option.get(), opp_played)
+    win_label.config(text = "Opponent played: " + opp_played + "\n" + did_win)
     print("Selected option:", selected_option.get())
     print("Opponent Played:", opp_played)
+
 
 root = Tk()
 root.geometry("500x500")
@@ -19,8 +21,6 @@ frame.pack(fill="both", expand=0)
 
 label = Label(frame)
 label.pack(fill = X,expand = 1)
-# Load an image (must be .png, .gif, or .ppm)
-rock_image = PhotoImage(file="../images/rock.png")
 
 image_files = ["../images/rock.png","../images/paper.png", "../images/scissors.png"]
 # List of options
@@ -48,6 +48,7 @@ selected_option.set(options[0])  # Set default image
 
 # Create a set of Radiobuttons
 for i, image in enumerate(images):
+    # noinspection PyTypeChecker
     Radiobutton(frame, image = image, variable=selected_option, value=options[i]).pack(anchor=W)
 
 
